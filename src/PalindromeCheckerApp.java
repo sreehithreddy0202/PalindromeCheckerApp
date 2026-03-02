@@ -6,17 +6,24 @@ public class PalindromeCheckerApp {
         System.out.print("Enter string: ");
         String original = sc.nextLine();
 
-        // Reverse using loop
-        String reversed = "";
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversed += original.charAt(i);
+        // Convert to char array (UC4)
+        char[] chars = original.toCharArray();
+        boolean isPalindrome = true;
+
+        // Two-pointer technique
+        for (int i = 0; i < chars.length / 2; i++) {
+            if (chars[i] != chars[chars.length - 1 - i]) {
+                isPalindrome = false;
+                break;
+            }
         }
 
-        // Compare and display result
-        if (original.equals(reversed)) {
+        if (isPalindrome) {
             System.out.println("Palindrome!");
         } else {
             System.out.println("Not a palindrome.");
         }
+        sc.close();
     }
 }
+
