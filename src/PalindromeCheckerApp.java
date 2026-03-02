@@ -1,6 +1,10 @@
 import java.util.Scanner;
-import java.util.Deque;
-import java.util.ArrayDeque;
+
+class ListNode {
+    char data;
+    ListNode next;
+    ListNode(char data) { this.data = data; }
+}
 
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
@@ -8,24 +12,23 @@ public class PalindromeCheckerApp {
         System.out.print("Enter string: ");
         String original = sc.nextLine();
 
-        // UC7: Deque implementation
-        Deque<Character> deque = new ArrayDeque<>();
-
-        // Add all characters
+        // Build linked list
+        ListNode head = null;
         for (char c : original.toCharArray()) {
-            deque.addLast(c);
+            ListNode newNode = new ListNode(c);
+            newNode.next = head;
+            head = newNode;
         }
 
-        // Compare front vs rear
-        boolean isPalindrome = true;
-        while (deque.size() > 1) {
-            if (deque.removeFirst() != deque.removeLast()) {
-                isPalindrome = false;
-                break;
-            }
+        // Check palindrome (simplified)
+        StringBuilder reversed = new StringBuilder();
+        ListNode temp = head;
+        while (temp != null) {
+            reversed.append(temp.data);
+            temp = temp.next;
         }
 
-        if (isPalindrome) {
+        if (original.equals(reversed.reverse().toString())) {
             System.out.println("Palindrome!");
         } else {
             System.out.println("Not a palindrome.");
@@ -33,6 +36,7 @@ public class PalindromeCheckerApp {
         sc.close();
     }
 }
+
 
 
 
