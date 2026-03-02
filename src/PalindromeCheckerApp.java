@@ -6,30 +6,29 @@ public class PalindromeCheckerApp {
         System.out.print("Enter string: ");
         String original = sc.nextLine();
 
-        if (isPalindromeRecursive(original, 0, original.length() - 1)) {
+        // UC10: Normalize (remove spaces + lowercase)
+        String normalized = original.replaceAll("\\s", "").toLowerCase();
+
+        // Use any previous method (two-pointer example)
+        char[] chars = normalized.toCharArray();
+        boolean isPalindrome = true;
+
+        for (int i = 0; i < chars.length / 2; i++) {
+            if (chars[i] != chars[chars.length - 1 - i]) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        if (isPalindrome) {
             System.out.println("Palindrome!");
         } else {
             System.out.println("Not a palindrome.");
         }
         sc.close();
     }
-
-    // UC9: Recursive method
-    public static boolean isPalindromeRecursive(String str, int left, int right) {
-        // Base condition
-        if (left >= right) {
-            return true;
-        }
-
-        // Compare first & last chars
-        if (str.charAt(left) != str.charAt(right)) {
-            return false;
-        }
-
-        // Recursive call
-        return isPalindromeRecursive(str, left + 1, right - 1);
-    }
 }
+
 
 
 
